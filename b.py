@@ -5,7 +5,7 @@ import cv2
 
 img = np.zeros((500, 1000), np.uint8)
 
-img.fill(240)
+img.fill(245)
 
 for i in range(256):
     img[i + 100][120:180] = 255 - i
