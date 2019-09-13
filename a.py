@@ -1,30 +1,16 @@
+# -*- coding: UTF-8 -*-
+# 要求：打开一BMP文件，将其转存为RGB三通道图像
+#       将图像量化为0.5/0.25灰度范围的图像
 import cv2
-import numpy as np
 
-imgmk = np.zeros([500, 900, 3], dtype=np.uint8)
-imgmk[:, 0:300, 2] = 255
-imgmk[:, 300:600, 1] = 255
-imgmk[:, 600:900, 0] = 255
+if __name__ == "__main__":
+    # 读取图片
+    img = cv2.imread('wallhaven.bmp')
+    # print(img.shape)
 
-cv2.namedWindow('imgmk', cv2.WINDOW_AUTOSIZE)
-cv2.imshow('imgmk', imgmk)
-cv2.waitKey(0)
-imgary = cv2.cvtColor(imgmk, cv2.COLOR_BGR2GRAY)
-cv2.imshow('imgary', imgary)
-cv2.waitKey(0)
+    # cv2.imread()函数读取图片后直接是BGR格式
+    # 保存图片
+    cv2.imwrite('wallhaven.jpg', img)
 
-imgB, imgG, imgR = cv2.split(imgmk)
-# img=cv2.merge([imgB,imgG,imgR])
-# cv2.namedWindow('img', cv2.WINDOW_NORMAL)
-# cv2.imshow('img', img)
-# cv2.waitKey(0)
-cv2.namedWindow('imgB', cv2.WINDOW_AUTOSIZE)
-cv2.imshow('imgB', imgB)
-cv2.waitKey(0)
-cv2.namedWindow('imgG', cv2.WINDOW_AUTOSIZE)
-cv2.imshow('imgG', imgG)
-cv2.waitKey(0)
-cv2.namedWindow('imgR', cv2.WINDOW_AUTOSIZE)
-cv2.imshow('imgR', imgR)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    # 转化为灰度图
+    imgary = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
