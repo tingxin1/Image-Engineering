@@ -1,12 +1,12 @@
 # -*- coding: UTF-8 -*-
-# 要求：生成图像文件，要求颜色等阶渐变，观察人言最小分辨率
+# 要求：生成图像文件，要求颜色等阶渐变，观察人眼最小分辨率
 
 import numpy as np
 import cv2
 
 img = np.zeros((400, 700, 3), np.uint8)
 
-img.fill(245)
+img.fill(48)
 
 # 生成渐变灰度图
 for i in range(256):
