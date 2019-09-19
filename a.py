@@ -4,6 +4,7 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
+
 if __name__ == "__main__":
     # 读取图片
     img = cv2.imread('wallhaven.bmp')
