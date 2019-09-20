@@ -21,6 +21,7 @@ if __name__ == "__main__":
     # print(imgray1.shape)
     #将图像量化到0.25~0.5之间
     imgray2 = imgray1/256*64+64
+    
     fig = plt.figure()
     plt.subplot(2, 3, 1)
     plt.title('opencv method')
