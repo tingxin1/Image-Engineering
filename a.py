@@ -12,7 +12,7 @@ if __name__ == "__main__":
 
     # cv2.imread()函数读取图片后直接是BGR格式
     # 保存图片
-    # cv2.imwrite('wallhaven.jpg', img)
+    cv2.imwrite('wallhaven.jpg', img)
 
     # opencv转化灰度图
     imgray0 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
