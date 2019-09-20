@@ -6,7 +6,9 @@ import cv2
 
 img = np.zeros((400, 700, 3), np.uint8)
 
-img.fill(48)
+img[:,:, 0].fill(108)
+img[:,:, 1].fill(99)
+img[:,:, 2].fill(139)
 
 # 生成渐变灰度图
 for i in range(256):
