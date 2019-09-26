@@ -33,12 +33,14 @@ if __name__ == "__main__":
     model_path = os.path.dirname(__file__)
     # 输入视频
     cap = cv2.VideoCapture(model_path + '/example.mp4')
+    video_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video_high = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
     # 输出视频
     video_out = model_path + '/telescope.mp4'
     fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out = cv2.VideoWriter(video_out, fourcc, 25.0, (852, 480))
+    out = cv2.VideoWriter(video_out, fourcc, 25.0, (video_width, video_high))
     # 望远镜图片
-    telescope = gen_polygon(480, 852)
+    telescope = gen_polygon(video_high, video_width)
     while (cap.isOpened()):
         rat, frame = cap.read()
         # 判断视频是否结束
