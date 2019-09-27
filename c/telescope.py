@@ -11,12 +11,12 @@ import numpy as np
 def gen_polygon(high, width):
     # 生成望远镜形状的图片
     telescope = np.zeros((high, width, 3), dtype='uint8')
-    telescope.fill(255)
+    telescope.fill(0)
     hi = high // 2
     wi = width // 2
     radius = min(hi, 3*width//10)
-    cv2.circle(telescope, (wi-2*radius//3, hi), radius, (0, 0, 0), -1)
-    cv2.circle(telescope, (wi+2*radius//3, hi), radius, (0, 0, 0), -1)
+    cv2.circle(telescope, (wi-2*radius//3, hi), radius, (255, 255, 255), -1)
+    cv2.circle(telescope, (wi+2*radius//3, hi), radius, (255, 255, 255), -1)
     # cv2.imshow("Circle",telescope)
     # cv2.waitKey(0)
     return telescope
@@ -46,7 +46,7 @@ if __name__ == "__main__":
         # 判断视频是否结束
         if not rat:
             break
-        frame_new = cv2.add(telescope, night_vision(frame))
+        frame_new = cv2.bitwise_and(telescope, night_vision(frame))
         cv2.imshow("processed", frame_new)
         out.write(frame_new)
         cv2.waitKey(50)
