@@ -1,3 +1,5 @@
+# -*- coding: UTF-8 -*-
+# 要求： 图像点操作（线性、非线性）
 import os
 import cv2
 import copy as cp
