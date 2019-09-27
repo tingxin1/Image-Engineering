@@ -22,10 +22,10 @@ def gen_polygon(high, width):
     return telescope
 
 
-def green_channel(image):
-    # 只显示RGB图片中的G通道
-    image[:, :, 0].fill(0)
-    image[:, :, 2].fill(0)
+def night_vision(image):
+    # 制造夜视效果，绿色通道不变，蓝色、红色通道减半
+    image[:,:,0]=image[:,:,0]//2
+    image[:,:,2]=image[:,:,2]//2
     return image
 
 
@@ -46,10 +46,10 @@ if __name__ == "__main__":
         # 判断视频是否结束
         if not rat:
             break
-        frame_new = cv2.add(telescope, green_channel(frame))
+        frame_new = cv2.add(telescope, night_vision(frame))
         cv2.imshow("processed", frame_new)
         out.write(frame_new)
         cv2.waitKey(50)
     cap.release()
-    # out.release()
+    out.release()
     cv2.destroyAllWindows()
