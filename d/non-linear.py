@@ -35,6 +35,8 @@ if __name__ == "__main__":
     img_linear = Linear(img)
     img_nonlinear = Nonlinear(img)
 
+    # cv2.imwrite(model_path + '/example_linear.png', img_linear)
+    # cv2.imwrite(model_path + '/example_nonlinear.png', img_nonlinear)
     plt.figure()
     plt.subplot(1, 3, 1)
     plt.title('original')
