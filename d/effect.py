@@ -4,10 +4,51 @@ import os
 import cv2
 import copy as cp
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def wave_effect(image):
+    # 水波特效
     img = cp.deepcopy(image)
+    row, col, channal = img.shape
+    center_x = col / 2.0
+    center_y = row / 2.0
+    A = 8.0  # 振幅大小
+    F = 0.5  # 频率大小
+
+    x_mask = np.zeros([row, col])
+    y_mask = np.zeros([row, col])
+    for i in range(row):
+        for j in range(col):
+            x_mask[i, j] = j
+            y_mask[i, j] = i
+    
+    xx_dif = x_mask - center_x
+    yy_dif = center_y - y_mask
+    theta = np.arctan2(yy_dif,  xx_dif)
+
+    r = np.sqrt(xx_dif * xx_dif + yy_dif * yy_dif)
+    r1 = r + A*col*0.01*np.sin(F*0.1*r)
+
+    x_new = r1 * np.cos(theta) + center_x
+    y_new = center_y - r1 * np.sin(theta)
+
+    int_x = np.floor(x_new)
+    int_x = int_x.astype(int)
+    int_y = np.floor(y_new)
+    int_y = int_y.astype(int)
+
+    for ii in range(row):
+        for jj in range(col):
+            new_xx = int_x[ii, jj]
+            new_yy = int_y[ii, jj]
+            if x_new[ii, jj] < 0 or x_new[ii, jj] > col - 1:
+                continue
+            if y_new[ii, jj] < 0 or y_new[ii, jj] > row - 1:
+                continue
+            img[ii, jj,:] = image[new_yy, new_xx,:]
+            
+    return img
 
 
 def relief_effect(image):
@@ -28,8 +69,12 @@ def relief_effect(image):
 
 if __name__ == "__main__":
     model_path = os.path.dirname(__file__)
-    img = cv2.imread(model_path + '/example.png')
-    relief = relief_effect(img)
-    cv2.imshow('relief effect', relief)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    # img = cv2.imread(model_path + '/example.png')
+    img = cv2.imread('C:/Users/zhang/Desktop/test.jpg')
+
+    # relief = relief_effect(img)
+    wave = wave_effect(img)
+    plt.figure(1)
+    plt.imshow(wave[..., ::-1])
+    plt.axis('off')
+    plt.show()
