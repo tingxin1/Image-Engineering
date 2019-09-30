@@ -57,9 +57,9 @@ def relief_effect(image):
     img = cp.deepcopy(image)
     # 转化为灰度图
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    for i in range(img_gray.shape[0]):
+    for i in range(img_gray.shape[0]-1):
         for j in range(img_gray.shape[1]-1):
-            tmp = img_gray[i, j] - img_gray[i, j + 1]+128
+            tmp = img_gray[i, j] - img_gray[i+1, j+1]+128
             if tmp > 255:
                 tmp = 255
             if tmp < 0:

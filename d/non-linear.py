@@ -20,7 +20,7 @@ def Linear(image):
 
 def Nonlinear(image):
     img = cp.deepcopy(image)
-    img = np.power(img.astype(np.int32), 2)//252
+    img = np.power(img.astype(np.int32), 2)//200
     # rows, cols, channals = img.shape
     # for c in range(channals):
     #     for i in range(rows):
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     plt.axis('off')
     plt.imshow(img_linear[..., ::-1])
     plt.subplot(1, 3, 3)
-    plt.title('Nonlinear x^2//252')
+    plt.title('Nonlinear x^2//200')
     plt.axis('off')
     plt.imshow(img_nonlinear[..., ::-1])
     plt.show()
