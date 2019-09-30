@@ -11,10 +11,11 @@ def wave_effect(image):
     # 水波特效
     img = cp.deepcopy(image)
     row, col, channal = img.shape
+    # 水波中心坐标
     center_x = col / 2.0
     center_y = row / 2.0
-    A = 8.0  # 振幅大小
-    F = 0.5  # 频率大小
+    A = 3.0  # 振幅大小
+    F = 2.0  # 频率大小
 
     x_mask = np.zeros([row, col])
     y_mask = np.zeros([row, col])
@@ -22,7 +23,7 @@ def wave_effect(image):
         for j in range(col):
             x_mask[i, j] = j
             y_mask[i, j] = i
-    
+
     xx_dif = x_mask - center_x
     yy_dif = center_y - y_mask
     theta = np.arctan2(yy_dif,  xx_dif)
@@ -32,7 +33,7 @@ def wave_effect(image):
 
     x_new = r1 * np.cos(theta) + center_x
     y_new = center_y - r1 * np.sin(theta)
-
+    # 向下取整
     int_x = np.floor(x_new)
     int_x = int_x.astype(int)
     int_y = np.floor(y_new)
@@ -46,8 +47,8 @@ def wave_effect(image):
                 continue
             if y_new[ii, jj] < 0 or y_new[ii, jj] > row - 1:
                 continue
-            img[ii, jj,:] = image[new_yy, new_xx,:]
-            
+            img[ii, jj, :] = image[new_yy, new_xx, :]
+
     return img
 
 
@@ -58,23 +59,33 @@ def relief_effect(image):
     img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     for i in range(img_gray.shape[0]):
         for j in range(img_gray.shape[1]-1):
-            tmp = img_gray[i, j] - img_gray[i, j + 1]+150
+            tmp = img_gray[i, j] - img_gray[i, j + 1]+128
             if tmp > 255:
                 tmp = 255
             if tmp < 0:
                 tmp = 0
             img_gray[i, j] = tmp
+
     return img_gray
 
 
 if __name__ == "__main__":
     model_path = os.path.dirname(__file__)
-    # img = cv2.imread(model_path + '/example.png')
-    img = cv2.imread('C:/Users/zhang/Desktop/test.jpg')
-
-    # relief = relief_effect(img)
+    img = cv2.imread(model_path + '/example.png')
+    relief = relief_effect(img)
     wave = wave_effect(img)
-    plt.figure(1)
+
+    plt.figure('effect')
+    plt.subplot(121)
+    plt.title('original')
+    plt.imshow(img[..., ::-1])
+    plt.axis('off')
+    plt.subplot(222)
+    plt.title('wave effect')
     plt.imshow(wave[..., ::-1])
+    plt.axis('off')
+    plt.subplot(224)
+    plt.title('relief effect')
+    plt.imshow(relief, cmap='gray')
     plt.axis('off')
     plt.show()
