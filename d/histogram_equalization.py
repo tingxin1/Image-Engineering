@@ -55,7 +55,7 @@ if __name__ == "__main__":
     image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     eq = cv2.equalizeHist(image)
     hist = cv2.calcHist([eq], [0], None, [256], [0, 256])
-
+    
     # 绘制直方图
     plt.figure()
     plt.subplot(321)

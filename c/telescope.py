@@ -24,8 +24,8 @@ def gen_polygon(high, width):
 
 def night_vision(image):
     # 制造夜视效果，绿色通道不变，蓝色、红色通道减半
-    image[:,:,0]=image[:,:,0]//2
-    image[:,:,2]=image[:,:,2]//2
+    image[:, :, 0] = image[:, :, 0]//2
+    image[:, :, 2] = image[:, :, 2]//2
     return image
 
 
