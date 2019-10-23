@@ -8,29 +8,29 @@ import numpy as np
 from decimal import Decimal
 from decimal import localcontext
 
-# def encode(picdata):
-#     dict = {}
-#     for key in picdata:
-#         dict[key] = dict.get(key, 0)+1
-#     sorted_key = sorted(dict.keys())
-#     # print(dict[sorted_key[0]])
+def encode(picdata):
+    dict = {}
+    for key in picdata:
+        dict[key] = dict.get(key, 0)+1
+    sorted_key = sorted(dict.keys())
+    print(dict[sorted_key[0]])
 
-#     # 计算概率值
-#     suma = 0
-#     for i in range(len(dict)):
-#         suma += dict[sorted_key[i]]
-#         dict[sorted_key[i]] = suma/len(picdata)
-#     # print(sorted(dict.items(), key=lambda obj: obj[0]))
-#     result = []
-#     for i in picdata:
+    # 计算概率值
+    suma = 0
+    for i in range(len(dict)):
+        suma += dict[sorted_key[i]]
+        dict[sorted_key[i]] = suma/len(picdata)
+    # print(sorted(dict.items(), key=lambda obj: obj[0]))
+    result = []
+    for i in picdata:
 
 
 def zoom(low, high):
     exlist = []
-    while(low//0.1 == high//0.1):
-        exlist.append(low//0.1)
-        low = low*10-low//0.1
-        high = high*10-high//0.1
+    while(low*10//1 == high*10//1):
+        exlist.append(low*10//1)
+        low = low*10-low*10//1
+        high = high*10-high*10//1
     return low, high, exlist
 
 
